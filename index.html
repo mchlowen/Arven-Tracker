@@ -19,9 +19,9 @@
       <div class="brand-mark">A</div>
       <p class="eyebrow">PERSONAL FINANCE</p>
       <h1>ARVEN TRACKER</h1>
-      <p id="lockMessage" class="muted">Masukkan PIN untuk membuka aplikasi.</p>
+      <p id="lockMessage" class="muted" data-i18n="lockPrompt">Masukkan PIN untuk membuka aplikasi.</p>
       <input id="pinInput" class="pin-input" inputmode="numeric" autocomplete="current-password" maxlength="6" type="password" placeholder="••••••">
-      <button id="unlockBtn" class="primary full">Buka aplikasi</button>
+      <button id="unlockBtn" class="primary full" data-i18n="unlock">Buka aplikasi</button>
       <p id="pinError" class="error"></p>
     </div>
   </div>
@@ -32,79 +32,94 @@
         <p class="eyebrow">PERSONAL FINANCE</p>
         <h1>ARVEN <span>TRACKER</span></h1>
       </div>
-      <button id="lockBtn" class="icon-btn" aria-label="Kunci aplikasi" title="Kunci aplikasi">⌑</button>
+      <button id="lockBtn" class="icon-btn" aria-label="Kunci aplikasi" title="Kunci aplikasi" data-i18n-title="lockLabel">⌑</button>
     </header>
 
     <nav class="tabs" aria-label="Navigasi utama">
-      <button class="tab active" data-view="dashboard">Overview</button>
-      <button class="tab" data-view="transactions">Transaksi</button>
-      <button class="tab" data-view="budget">Budget</button>
-      <button class="tab" data-view="settings">Settings</button>
+      <button class="tab active" data-view="dashboard" data-i18n="navOverview">Overview</button>
+      <button class="tab" data-view="chat" data-i18n="navChat">Chat</button>
+      <button class="tab" data-view="transactions" data-i18n="navTransactions">Transaksi</button>
+      <button class="tab" data-view="budget" data-i18n="navBudget">Budget</button>
+      <button class="tab" data-view="settings" data-i18n="navSettings">Settings</button>
     </nav>
 
     <section id="dashboardView" class="view">
       <div class="welcome-row">
-        <div><p class="muted small" id="monthLabel">RINGKASAN BULAN INI</p><h2>Financial overview</h2></div>
+        <div><p class="muted small" id="monthLabel" data-i18n="monthSummary">RINGKASAN BULAN INI</p><h2 data-i18n="financialOverview">Financial overview</h2></div>
         <span class="local-pill"><i></i> LOCAL</span>
       </div>
       <article class="balance-card">
-        <p class="card-label">SISA CASH FLOW BULAN INI</p>
+        <p class="card-label" data-i18n="cashflow">SISA CASH FLOW BULAN INI</p>
         <h2 id="balanceValue">Rp0</h2>
         <div class="balance-grid">
-          <div><span>Pemasukan</span><strong id="incomeValue">Rp0</strong></div>
-          <div><span>Pengeluaran</span><strong id="expenseValue">Rp0</strong></div>
+          <div><span data-i18n="income">Pemasukan</span><strong id="incomeValue">Rp0</strong></div>
+          <div><span data-i18n="expense">Pengeluaran</span><strong id="expenseValue">Rp0</strong></div>
         </div>
       </article>
-      <div class="section-heading"><h3>Ringkasan</h3><span class="muted small">Bulan berjalan</span></div>
+      <div class="section-heading"><h3 data-i18n="summary">Ringkasan</h3><span class="muted small" data-i18n="currentMonth">Bulan berjalan</span></div>
       <div class="stat-grid">
-        <article class="stat-card"><span>Total transaksi</span><strong id="transactionCount">0</strong></article>
-        <article class="stat-card"><span>Tabungan tercatat</span><strong id="savingsValue">Rp0</strong></article>
+        <article class="stat-card"><span data-i18n="totalTransactions">Total transaksi</span><strong id="transactionCount">0</strong></article>
+        <article class="stat-card"><span data-i18n="recordedSavings">Tabungan tercatat</span><strong id="savingsValue">Rp0</strong></article>
       </div>
-      <div class="section-heading"><h3>Pengeluaran tercatat</h3><span class="muted small">Per kategori</span></div>
+      <div class="section-heading"><h3 data-i18n="recordedExpenses">Pengeluaran tercatat</h3><span class="muted small" data-i18n="byCategory">Per kategori</span></div>
       <div id="categoryBreakdown" class="breakdown"></div>
-      <div class="section-heading"><h3>Transaksi terbaru</h3><button class="text-btn" data-goto="transactions">Lihat semua</button></div>
+      <div class="section-heading"><h3 data-i18n="latestTransactions">Transaksi terbaru</h3><button class="text-btn" data-goto="transactions" data-i18n="seeAll">Lihat semua</button></div>
       <div id="recentTransactions" class="transaction-list"></div>
     </section>
 
+    <section id="chatView" class="view hidden">
+      <p class="muted small" data-i18n="chatEyebrow">LOCAL FINANCE ASSISTANT</p>
+      <h2 data-i18n="chatTitle">ARVEN Assistant</h2>
+      <article class="panel chat-intro"><p data-i18n="chatIntro">Ceritakan transaksi dengan bahasa sehari-hari. ARVEN akan mengenali nominal, jenis, tanggal, dan kategori lalu menyimpannya secara lokal.</p><p class="muted small" data-i18n="chatExample">Contoh: Hari ini membeli makan 50.000 · Gaji masuk 6 juta</p></article>
+      <div id="chatMessages" class="chat-messages" aria-live="polite"><div class="chat-bubble assistant" data-i18n="chatWelcome">Halo! Ada transaksi yang ingin kamu catat?</div></div>
+      <form id="chatForm" class="chat-compose"><input id="chatInput" autocomplete="off" maxlength="240" data-i18n-placeholder="chatPlaceholder" placeholder="Contoh: hari ini membeli makan 50.000"><button class="primary" type="submit" data-i18n="send">Kirim</button></form>
+      <p class="muted small chat-note" data-i18n="chatPrivacy">Pemrosesan dilakukan di perangkat ini. Tidak menggunakan AI cloud atau mengirim pesan ke server.</p>
+    </section>
+
     <section id="transactionsView" class="view hidden">
-      <div class="section-heading"><div><p class="muted small">CATATAN KEUANGAN</p><h2>Transactions</h2></div><button id="addTransactionBtn" class="primary">+ Tambah</button></div>
+      <div class="section-heading"><div><p class="muted small" data-i18n="financialNotes">CATATAN KEUANGAN</p><h2 data-i18n="transactionsTitle">Transactions</h2></div><button id="addTransactionBtn" class="primary" data-i18n="add">+ Tambah</button></div>
       <div class="filter-row">
         <select id="monthFilter" aria-label="Filter bulan"></select>
-        <select id="typeFilter" aria-label="Filter jenis"><option value="all">Semua jenis</option><option value="expense">Pengeluaran</option><option value="income">Pemasukan</option></select>
+        <select id="typeFilter" aria-label="Filter jenis"><option value="all" data-i18n="allTypes">Semua jenis</option><option value="expense" data-i18n="expenseType">Pengeluaran</option><option value="income" data-i18n="incomeType">Pemasukan</option></select>
       </div>
       <div id="allTransactions" class="transaction-list"></div>
     </section>
 
     <section id="budgetView" class="view hidden">
-      <p class="muted small">PERENCANAAN KEUANGAN</p><h2>Monthly budget</h2>
-      <article class="stat-card budget-total"><span>Anggaran bulanan</span><strong id="budgetTotal">Rp0</strong><p class="muted small">Atur batas pengeluaran bulananmu.</p></article>
+      <p class="muted small" data-i18n="planning">PERENCANAAN KEUANGAN</p><h2 data-i18n="budgetTitle">Monthly budget</h2>
+      <article class="stat-card budget-total"><span data-i18n="budgetTitle">Anggaran bulanan</span><strong id="budgetTotal">Rp0</strong><p class="muted small" data-i18n="budgetHint">Atur batas pengeluaran bulananmu.</p></article>
       <form id="budgetForm" class="panel form-grid">
-        <label>Nama kategori<input id="budgetName" required maxlength="40" placeholder="Contoh: Makan"></label>
-        <label>Batas anggaran (Rp)<input id="budgetAmount" required type="number" min="1" inputmode="numeric" placeholder="500000"></label>
-        <button class="primary full" type="submit">Simpan anggaran</button>
+        <label><span data-i18n="categoryName">Nama kategori</span><input id="budgetName" required maxlength="40" placeholder="Contoh: Makan"></label>
+        <label><span data-i18n="budgetLimit">Batas anggaran (Rp)</span><input id="budgetAmount" required type="number" min="1" inputmode="numeric" placeholder="500000"></label>
+        <button class="primary full" type="submit" data-i18n="saveBudget">Simpan anggaran</button>
       </form>
       <div id="budgetList" class="budget-list"></div>
     </section>
 
     <section id="settingsView" class="view hidden">
-      <p class="muted small">PREFERENCES & DATA</p><h2>Settings</h2>
+      <p class="muted small">PREFERENCES & DATA</p><h2 data-i18n="settingsTitle">Settings</h2>
       <article class="panel">
-        <h3>Keamanan aplikasi</h3>
-        <p class="muted small">PIN lokal 6 digit untuk mengunci tampilan aplikasi pada perangkat ini.</p>
-        <button id="setPinBtn" class="secondary full">Atur / ubah PIN</button>
+        <h3 data-i18n="preferences">Preferensi tampilan</h3>
+        <label><span data-i18n="language">Bahasa aplikasi</span><select id="languageSelect"><option value="id">Bahasa Indonesia</option><option value="en">English</option></select></label>
+        <div class="setting-row"><div><strong data-i18n="appearance">Mode tampilan</strong><p class="muted small" data-i18n="appearanceHint">Pilih tampilan gelap atau terang.</p></div><button id="themeToggle" class="secondary" type="button">☀️ Day mode</button></div>
       </article>
       <article class="panel">
-        <h3>Backup & restore</h3>
-        <p class="muted small">Simpan salinan data ke file JSON. Simpan file backup di Files atau iCloud Drive pribadi.</p>
+        <h3 data-i18n="security">Keamanan aplikasi</h3>
+        <p class="muted small" data-i18n="pinHint">PIN lokal 6 digit untuk mengunci tampilan aplikasi pada perangkat ini.</p>
+        <button id="setPinBtn" class="secondary full" data-i18n="setPin">Atur / ubah PIN</button>
+      </article>
+      <article class="panel">
+        <h3 data-i18n="backup">Backup & restore</h3>
+        <p class="muted small" data-i18n="backupHint">Simpan salinan data ke file JSON. Simpan file backup di Files atau iCloud Drive pribadi.</p>
         <div class="button-stack">
-          <button id="exportBtn" class="secondary full">Ekspor backup JSON</button>
-          <label class="secondary full file-label">Impor backup JSON<input id="importInput" type="file" accept=".json,application/json"></label>
+          <button id="exportBtn" class="secondary full" data-i18n="export">Ekspor backup JSON</button>
+          <label class="secondary full file-label"><span data-i18n="import">Impor backup JSON</span><input id="importInput" type="file" accept=".json,application/json"></label>
         </div>
       </article>
       <article class="panel">
-        <h3>Data aplikasi</h3>
-        <p class="muted small">Semua transaksi dan anggaran disimpan di penyimpanan browser pada perangkat ini. Hapus data Safari dapat menghapus data aplikasi yang belum di-backup.</p>
-        <button id="clearBtn" class="danger full">Hapus seluruh data aplikasi</button>
+        <h3 data-i18n="appData">Data aplikasi</h3>
+        <p class="muted small" data-i18n="dataHint">Semua transaksi dan anggaran disimpan di penyimpanan browser pada perangkat ini. Hapus data Safari dapat menghapus data aplikasi yang belum di-backup.</p>
+        <button id="clearBtn" class="danger full" data-i18n="clear">Hapus seluruh data aplikasi</button>
       </article>
       <p class="footnote">ARVEN TRACKER · Local-first edition · Tidak mengirim data ke server analitik.</p>
     </section>
@@ -112,23 +127,23 @@
 
   <dialog id="transactionDialog">
     <form id="transactionForm" method="dialog" class="dialog-content">
-      <div class="dialog-head"><div><p class="eyebrow">NEW ENTRY</p><h2>Tambah transaksi</h2></div><button type="button" class="icon-btn" id="closeDialog">×</button></div>
-      <label>Jenis transaksi<select id="txType"><option value="expense">Pengeluaran</option><option value="income">Pemasukan</option></select></label>
-      <label>Deskripsi<input id="txDescription" required maxlength="70" placeholder="Contoh: Makan siang"></label>
-      <label>Kategori<select id="txCategory"><option>Makan</option><option>Transportasi</option><option>Cicilan</option><option>Tagihan</option><option>Langganan</option><option>Belanja</option><option>Gaji</option><option>Freelance</option><option>Kesehatan</option><option>Lainnya</option></select></label>
-      <label>Nominal (Rp)<input id="txAmount" required type="number" min="1" inputmode="numeric" placeholder="50000"></label>
-      <label>Tanggal<input id="txDate" required type="date"></label>
-      <div class="dialog-actions"><button type="button" id="cancelDialog" class="secondary">Batal</button><button type="submit" class="primary">Simpan transaksi</button></div>
+      <div class="dialog-head"><div><p class="eyebrow" data-i18n="newEntry">NEW ENTRY</p><h2 data-i18n="addTransactionTitle">Tambah transaksi</h2></div><button type="button" class="icon-btn" id="closeDialog">×</button></div>
+      <label><span data-i18n="transactionType">Jenis transaksi</span><select id="txType"><option value="expense">Pengeluaran</option><option value="income">Pemasukan</option></select></label>
+      <label><span data-i18n="description">Deskripsi</span><input id="txDescription" required maxlength="70" placeholder="Contoh: Makan siang"></label>
+      <label><span data-i18n="category">Kategori</span><select id="txCategory"><option>Makan</option><option>Transportasi</option><option>Cicilan</option><option>Tagihan</option><option>Langganan</option><option>Belanja</option><option>Gaji</option><option>Freelance</option><option>Kesehatan</option><option>Lainnya</option></select></label>
+      <label><span data-i18n="amount">Nominal (Rp)</span><input id="txAmount" required type="number" min="1" inputmode="numeric" placeholder="50000"></label>
+      <label><span data-i18n="date">Tanggal</span><input id="txDate" required type="date"></label>
+      <div class="dialog-actions"><button type="button" id="cancelDialog" class="secondary" data-i18n="cancel">Batal</button><button type="submit" class="primary" data-i18n="saveTransaction">Simpan transaksi</button></div>
     </form>
   </dialog>
 
   <dialog id="pinDialog">
     <form id="pinForm" method="dialog" class="dialog-content">
-      <div class="dialog-head"><div><p class="eyebrow">APP SECURITY</p><h2>Atur PIN</h2></div><button type="button" class="icon-btn" id="closePinDialog">×</button></div>
-      <p class="muted small">Buat PIN 6 digit. Jangan gunakan PIN yang sama dengan PIN perbankan.</p>
-      <label>PIN baru<input id="newPin" type="password" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required placeholder="6 digit"></label>
-      <label>Ulangi PIN<input id="confirmPin" type="password" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required placeholder="Ulangi PIN"></label>
-      <div class="dialog-actions"><button type="button" id="cancelPinDialog" class="secondary">Batal</button><button type="submit" class="primary">Simpan PIN</button></div>
+      <div class="dialog-head"><div><p class="eyebrow">APP SECURITY</p><h2 data-i18n="pinTitle">Atur PIN</h2></div><button type="button" class="icon-btn" id="closePinDialog">×</button></div>
+      <p class="muted small" data-i18n="pinInstructions">Buat PIN 6 digit. Jangan gunakan PIN yang sama dengan PIN perbankan.</p>
+      <label><span data-i18n="newPin">PIN baru</span><input id="newPin" type="password" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required placeholder="6 digit"></label>
+      <label><span data-i18n="repeatPin">Ulangi PIN</span><input id="confirmPin" type="password" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required placeholder="Ulangi PIN"></label>
+      <div class="dialog-actions"><button type="button" id="cancelPinDialog" class="secondary" data-i18n="cancel">Batal</button><button type="submit" class="primary" data-i18n="savePin">Simpan PIN</button></div>
     </form>
   </dialog>
   <div id="toast" class="toast" role="status"></div>

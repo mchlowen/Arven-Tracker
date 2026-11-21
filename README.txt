@@ -1,37 +1,28 @@
-ARVEN TRACKER — SAFARI / iPHONE PWA
+ARVEN TRACKER — Safari PWA
 
-PENTING:
-- PWA memerlukan secure origin (HTTPS) untuk instalasi Home Screen dan Service Worker.
-- File ini tidak bisa dipasang langsung dengan membuka index.html dari aplikasi Files.
-- Setelah pertama kali dibuka melalui HTTPS dan ditambahkan ke Home Screen, app shell dapat berjalan offline.
-- Data transaksi disimpan di IndexedDB pada browser/perangkat ini.
-- Backup JSON harus dibuat dan disimpan secara berkala.
-- PIN adalah access gate aplikasi, bukan pengganti passcode iPhone atau enkripsi perangkat.
-- Jangan menghapus website data Safari sebelum membuat backup.
+Local-first personal finance tracker.
 
-CARA MEMASANG:
-1. Unggah seluruh isi folder ini ke static hosting yang menyediakan HTTPS (misalnya GitHub Pages atau Cloudflare Pages).
-2. Buka URL situs tersebut di Safari pada iPhone.
-3. Tunggu sampai halaman termuat penuh sekali dengan koneksi internet.
-4. Tekan tombol Share di Safari.
-5. Pilih "Add to Home Screen" / "Tambahkan ke Layar Utama".
-6. Aktifkan "Open as Web App" jika opsi tersedia, lalu tekan Add.
-7. Buka ikon ARVEN dari Home Screen.
-8. Masuk ke Settings > Atur / ubah PIN untuk membuat PIN 6 digit.
+Features in this package:
+- Dashboard, transactions, monthly budgets
+- Indonesian / English interface selection
+- Dark / light appearance toggle
+- Local chat assistant for transaction entry (rule-based parsing, no cloud AI/API)
+- Local IndexedDB storage
+- JSON backup and restore
+- 6-digit local PIN access gate
+- Service Worker offline app-shell cache
 
-CATATAN PRIVASI:
-- Aplikasi tidak mengirim transaksi ke API atau database cloud.
-- Hosting hanya menyajikan file aplikasi statis.
-- Font eksternal Google Fonts dipakai sebagai peningkatan visual; jika offline font sistem akan digunakan.
-- Untuk penggunaan yang lebih privat, self-host font atau hapus import Google Fonts di styles.css.
+Deploy: publish all files in the repository root using GitHub Pages (main / root).
+Open the HTTPS URL in Safari and use Share > Add to Home Screen.
 
-FITUR:
-- Dashboard cash flow bulanan
-- Tambah transaksi pemasukan/pengeluaran
-- Breakdown pengeluaran berdasarkan kategori
-- Anggaran per kategori
-- PIN lokal
-- Ekspor dan impor JSON
-- Cache app shell untuk akses offline
+Chat assistant examples:
+- Hari ini membeli makan 50.000
+- Gaji masuk 6 juta
+- Bought lunch today 50,000
+- Salary received 6 million
 
-VERSI INI ADALAH STARTER PWA, BUKAN APLIKASI NATIVE iOS.
+Important:
+- Chat parsing is local and rule-based, not a general AI assistant. It may not understand every phrasing. Review each transaction summary in the chat.
+- Transaction and budget data remain in this browser's IndexedDB. Back up before major updates, clearing browser data, or changing devices.
+- The PIN is an access gate, not database encryption or server authentication.
+- Do not put financial records or backup files in the public GitHub repository.
